@@ -1,4 +1,4 @@
-defmodule VenuelaBackend.DataCase do
+defmodule PeachBackend.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule VenuelaBackend.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use VenuelaBackend.DataCase, async: true`, although
+  by setting `use PeachBackend.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,17 +18,17 @@ defmodule VenuelaBackend.DataCase do
 
   using do
     quote do
-      alias VenuelaBackend.Repo
+      alias PeachBackend.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import VenuelaBackend.DataCase
+      import PeachBackend.DataCase
     end
   end
 
   setup tags do
-    VenuelaBackend.DataCase.setup_sandbox(tags)
+    PeachBackend.DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -36,7 +36,7 @@ defmodule VenuelaBackend.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(VenuelaBackend.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(PeachBackend.Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 

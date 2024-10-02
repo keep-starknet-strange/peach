@@ -1,4 +1,4 @@
-defmodule VenuelaBackend.Application do
+defmodule PeachBackend.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,21 +8,21 @@ defmodule VenuelaBackend.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      VenuelaBackendWeb.Telemetry,
-      VenuelaBackend.Repo,
-      {DNSCluster, query: Application.get_env(:venuela_backend, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: VenuelaBackend.PubSub},
+      PeachBackendWeb.Telemetry,
+      PeachBackend.Repo,
+      {DNSCluster, query: Application.get_env(:peach_backend, :dns_cluster_query) || :ignore},
+      {Phoenix.PubSub, name: PeachBackend.PubSub},
       # Start the Finch HTTP client for sending emails
-      {Finch, name: VenuelaBackend.Finch},
-      # Start a worker by calling: VenuelaBackend.Worker.start_link(arg)
-      # {VenuelaBackend.Worker, arg},
+      {Finch, name: PeachBackend.Finch},
+      # Start a worker by calling: PeachBackend.Worker.start_link(arg)
+      # {PeachBackend.Worker, arg},
       # Start to serve requests, typically the last entry
-      VenuelaBackendWeb.Endpoint
+      PeachBackendWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: VenuelaBackend.Supervisor]
+    opts = [strategy: :one_for_one, name: PeachBackend.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -30,7 +30,7 @@ defmodule VenuelaBackend.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    VenuelaBackendWeb.Endpoint.config_change(changed, removed)
+    PeachBackendWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

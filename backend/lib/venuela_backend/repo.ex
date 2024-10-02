@@ -1,5 +1,5 @@
-defmodule VenuelaBackend.Repo do
+defmodule PeachBackend.Repo do
   use Ecto.Repo,
-    otp_app: :venuela_backend,
+    otp_app: :peach_backend,
     adapter: Ecto.Adapters.Postgres
 end

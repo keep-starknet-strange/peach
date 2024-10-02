@@ -1,6 +1,6 @@
-defmodule VenuelaBackend do
+defmodule PeachBackend do
   @moduledoc """
-  VenuelaBackend keeps the contexts that define your domain
+  PeachBackend keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(VenuelaBackend.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(PeachBackend.Repo, :manual)

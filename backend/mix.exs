@@ -1,9 +1,9 @@
-defmodule VenuelaBackend.MixProject do
+defmodule PeachBackend.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :venuela_backend,
+      app: :peach_backend,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule VenuelaBackend.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {VenuelaBackend.Application, []},
+      mod: {PeachBackend.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

@@ -1,4 +1,4 @@
-# VenuelaBackend
+# PeachBackend
 
 To start your Phoenix server:
 

@@ -1,4 +1,4 @@
-defmodule VenuelaBackendWeb.Telemetry do
+defmodule PeachBackendWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -52,23 +52,23 @@ defmodule VenuelaBackendWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("venuela_backend.repo.query.total_time",
+      summary("peach_backend.repo.query.total_time",
         unit: {:native, :millisecond},
         description: "The sum of the other measurements"
       ),
-      summary("venuela_backend.repo.query.decode_time",
+      summary("peach_backend.repo.query.decode_time",
         unit: {:native, :millisecond},
         description: "The time spent decoding the data received from the database"
       ),
-      summary("venuela_backend.repo.query.query_time",
+      summary("peach_backend.repo.query.query_time",
         unit: {:native, :millisecond},
         description: "The time spent executing the query"
       ),
-      summary("venuela_backend.repo.query.queue_time",
+      summary("peach_backend.repo.query.queue_time",
         unit: {:native, :millisecond},
         description: "The time spent waiting for a database connection"
       ),
-      summary("venuela_backend.repo.query.idle_time",
+      summary("peach_backend.repo.query.idle_time",
         unit: {:native, :millisecond},
         description:
           "The time the connection spent waiting before being checked out for the query"
@@ -86,7 +86,7 @@ defmodule VenuelaBackendWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {VenuelaBackendWeb, :count_users, []}
+      # {PeachBackendWeb, :count_users, []}
     ]
   end
 end

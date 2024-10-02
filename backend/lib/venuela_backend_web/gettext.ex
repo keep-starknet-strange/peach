@@ -1,11 +1,11 @@
-defmodule VenuelaBackendWeb.Gettext do
+defmodule PeachBackendWeb.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
   By using [Gettext](https://hexdocs.pm/gettext),
   your module gains a set of macros for translations, for example:
 
-      import VenuelaBackendWeb.Gettext
+      import PeachBackendWeb.Gettext
 
       # Simple translation
       gettext("Here is the string to translate")
@@ -20,5 +20,5 @@ defmodule VenuelaBackendWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :venuela_backend
+  use Gettext, otp_app: :peach_backend
 end

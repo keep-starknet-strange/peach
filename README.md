@@ -1,6 +1,6 @@
-# Venuela Monorepo
+# Peach Monorepo
 
-Venuela is a next-generation event ticketing platform leveraging blockchain technology for secure, transparent, and efficient ticket management.
+Peach is a next-generation event ticketing platform leveraging blockchain technology for secure, transparent, and efficient ticket management.
 
 ## Project Structure
 
@@ -8,8 +8,8 @@ This monorepo contains the following components:
 
 - `backend/`: Elixir backend using Phoenix framework
 - `onchain/`: Starknet smart contracts implemented in Cairo
-- `app/`: Venuela main application
-- `website/`: Venuela website
+- `app/`: Peach main application
+- `website/`: Peach website
 
 ## Getting Started
 
@@ -26,8 +26,8 @@ This monorepo contains the following components:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/keep-starknet-strange/venuela.git
-   cd venuela
+   git clone https://github.com/keep-starknet-strange/peach.git
+   cd peach
    ```
 
 2. Follow the README instructions in each component directory to set up and run the different parts of the project.

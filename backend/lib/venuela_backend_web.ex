@@ -1,12 +1,12 @@
-defmodule VenuelaBackendWeb do
+defmodule PeachBackendWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use VenuelaBackendWeb, :controller
-      use VenuelaBackendWeb, :html
+      use PeachBackendWeb, :controller
+      use PeachBackendWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -39,10 +39,10 @@ defmodule VenuelaBackendWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: VenuelaBackendWeb.Layouts]
+        layouts: [html: PeachBackendWeb.Layouts]
 
       import Plug.Conn
-      import VenuelaBackendWeb.Gettext
+      import PeachBackendWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -51,9 +51,9 @@ defmodule VenuelaBackendWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: VenuelaBackendWeb.Endpoint,
-        router: VenuelaBackendWeb.Router,
-        statics: VenuelaBackendWeb.static_paths()
+        endpoint: PeachBackendWeb.Endpoint,
+        router: PeachBackendWeb.Router,
+        statics: PeachBackendWeb.static_paths()
     end
   end
 

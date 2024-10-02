@@ -1,3 +1,3 @@
-defmodule VenuelaBackend.Mailer do
-  use Swoosh.Mailer, otp_app: :venuela_backend
+defmodule PeachBackend.Mailer do
+  use Swoosh.Mailer, otp_app: :peach_backend
 end

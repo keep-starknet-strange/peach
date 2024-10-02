@@ -3,9 +3,9 @@ version: "3.8"
 services:
   postgres:
     image: postgres:17
-    container_name: venuela_postgres
+    container_name: peach_postgres
     environment:
-      POSTGRES_DB: venuela
+      POSTGRES_DB: peach
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -15,7 +15,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: venuela_pgadmin
+    container_name: peach_pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin

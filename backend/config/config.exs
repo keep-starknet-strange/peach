@@ -7,19 +7,19 @@
 # General application configuration
 import Config
 
-config :venuela_backend,
-  ecto_repos: [VenuelaBackend.Repo],
+config :peach_backend,
+  ecto_repos: [PeachBackend.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :venuela_backend, VenuelaBackendWeb.Endpoint,
+config :peach_backend, PeachBackendWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [json: VenuelaBackendWeb.ErrorJSON],
+    formats: [json: PeachBackendWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: VenuelaBackend.PubSub,
+  pubsub_server: PeachBackend.PubSub,
   live_view: [signing_salt: "41pzaInh"]
 
 # Configures the mailer
@@ -29,7 +29,7 @@ config :venuela_backend, VenuelaBackendWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :venuela_backend, VenuelaBackend.Mailer, adapter: Swoosh.Adapters.Local
+config :peach_backend, PeachBackend.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configures Elixir's Logger
 config :logger, :console,
