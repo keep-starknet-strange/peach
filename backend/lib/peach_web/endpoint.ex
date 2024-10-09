@@ -1,12 +1,12 @@
-defmodule PeachBackendWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :peach_backend
+defmodule PeachWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :peach
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_peach_backend_key",
+    key: "_peach_key",
     signing_salt: "VHMWMcMU",
     same_site: "Lax"
   ]
@@ -22,16 +22,16 @@ defmodule PeachBackendWeb.Endpoint do
   # when deploying your static files in production.
   plug(Plug.Static,
     at: "/",
-    from: :peach_backend,
+    from: :peach,
     gzip: false,
-    only: PeachBackendWeb.static_paths()
+    only: PeachWeb.static_paths()
   )
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug(Phoenix.CodeReloader)
-    plug(Phoenix.Ecto.CheckRepoStatus, otp_app: :peach_backend)
+    plug(Phoenix.Ecto.CheckRepoStatus, otp_app: :peach)
   end
 
   plug(Phoenix.LiveDashboard.RequestLogger,
@@ -51,5 +51,5 @@ defmodule PeachBackendWeb.Endpoint do
   plug(Plug.MethodOverride)
   plug(Plug.Head)
   plug(Plug.Session, @session_options)
-  plug(PeachBackendWeb.Router)
+  plug(PeachWeb.Router)
 end

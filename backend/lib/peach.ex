@@ -1,6 +1,6 @@
-defmodule PeachBackend do
+defmodule Peach do
   @moduledoc """
-  PeachBackend keeps the contexts that define your domain
+  Peach keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

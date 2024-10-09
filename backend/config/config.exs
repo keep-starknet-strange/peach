@@ -7,19 +7,19 @@
 # General application configuration
 import Config
 
-config :peach_backend,
-  ecto_repos: [PeachBackend.Repo],
+config :peach,
+  ecto_repos: [Peach.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :peach_backend, PeachBackendWeb.Endpoint,
+config :peach, PeachWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [json: PeachBackendWeb.ErrorJSON],
+    formats: [json: PeachWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: PeachBackend.PubSub,
+  pubsub_server: Peach.PubSub,
   live_view: [signing_salt: "41pzaInh"]
 
 # Configures the mailer
@@ -29,7 +29,7 @@ config :peach_backend, PeachBackendWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :peach_backend, PeachBackend.Mailer, adapter: Swoosh.Adapters.Local
+config :peach, Peach.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configures Elixir's Logger
 config :logger, :console,
