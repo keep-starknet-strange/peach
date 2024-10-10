@@ -5,7 +5,7 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     PeachBackend.Repo.insert!(%PeachBackend.SomeSchema{})
+#     Peach.Repo.insert!(%Peach.SomeSchema{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.

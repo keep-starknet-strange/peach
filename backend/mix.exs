@@ -1,13 +1,18 @@
-defmodule PeachBackend.MixProject do
+defmodule Peach.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :peach_backend,
+      app: :peach,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.json": :test
+      ],
       aliases: aliases(),
       deps: deps()
     ]
@@ -18,7 +23,7 @@ defmodule PeachBackend.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {PeachBackend.Application, []},
+      mod: {Peach.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -44,7 +49,9 @@ defmodule PeachBackend.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.18", only: [:test]}
     ]
   end
 

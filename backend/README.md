@@ -1,4 +1,4 @@
-# PeachBackend
+# Peach
 
 To start your Phoenix server:
 

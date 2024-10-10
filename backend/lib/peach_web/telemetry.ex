@@ -1,4 +1,4 @@
-defmodule PeachBackendWeb.Telemetry do
+defmodule PeachWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -52,23 +52,23 @@ defmodule PeachBackendWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("peach_backend.repo.query.total_time",
+      summary("peach.repo.query.total_time",
         unit: {:native, :millisecond},
         description: "The sum of the other measurements"
       ),
-      summary("peach_backend.repo.query.decode_time",
+      summary("peach.repo.query.decode_time",
         unit: {:native, :millisecond},
         description: "The time spent decoding the data received from the database"
       ),
-      summary("peach_backend.repo.query.query_time",
+      summary("peach.repo.query.query_time",
         unit: {:native, :millisecond},
         description: "The time spent executing the query"
       ),
-      summary("peach_backend.repo.query.queue_time",
+      summary("peach.repo.query.queue_time",
         unit: {:native, :millisecond},
         description: "The time spent waiting for a database connection"
       ),
-      summary("peach_backend.repo.query.idle_time",
+      summary("peach.repo.query.idle_time",
         unit: {:native, :millisecond},
         description:
           "The time the connection spent waiting before being checked out for the query"
@@ -86,7 +86,7 @@ defmodule PeachBackendWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {PeachBackendWeb, :count_users, []}
+      # {PeachWeb, :count_users, []}
     ]
   end
 end
