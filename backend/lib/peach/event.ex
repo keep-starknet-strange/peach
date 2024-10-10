@@ -1,4 +1,7 @@
 defmodule Peach.Event do
+  @moduledoc """
+  Defines an event object for the peach app
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

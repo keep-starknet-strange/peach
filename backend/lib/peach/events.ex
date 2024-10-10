@@ -1,6 +1,9 @@
 defmodule Events do
-  alias Peach.Repo
+  @moduledoc """
+  Manages the events for the peach app
+  """
   alias Peach.Event
+  alias Peach.Repo
 
   @doc """
   Creates an event with the given attributes.

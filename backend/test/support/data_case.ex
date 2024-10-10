@@ -13,6 +13,7 @@ defmodule Peach.DataCase do
   by setting `use Peach.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
+  alias Ecto.Adapters.SQL.Sandbox
 
   use ExUnit.CaseTemplate
 
@@ -36,10 +37,10 @@ defmodule Peach.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Peach.Repo, shared: not tags[:async])
+    pid = Sandbox.start_owner!(Peach.Repo, shared: not tags[:async])
     # Reset the sequence for the `events` table before each test
     Peach.Repo.query!("ALTER SEQUENCE events_id_seq RESTART WITH 1")
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
   end
 
   @doc """

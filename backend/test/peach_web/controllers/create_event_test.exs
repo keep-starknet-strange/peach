@@ -3,8 +3,8 @@ defmodule PeachWeb.EventControllerTest do
 
   import Ecto.Query
 
-  alias Peach.Repo
   alias Peach.Event
+  alias Peach.Repo
   alias Peach.TicketTier
 
   @valid_event_attrs %{

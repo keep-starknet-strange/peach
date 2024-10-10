@@ -1,4 +1,7 @@
 defmodule Peach.TicketTier do
+  @moduledoc """
+  Defines a ticket tier for the peach app
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,7 @@
 defmodule Peach.Ticket do
+  @moduledoc """
+  Defines a ticket for the peach app
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
