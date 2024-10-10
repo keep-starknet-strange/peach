@@ -9,6 +9,7 @@ defmodule Peach.Repo.Migrations.CreateEvents do
       add :date, :utc_datetime
       add :cover, :string
       add :onchain, :boolean, default: false
+      add :treasury, :string
 
       timestamps(type: :utc_datetime)
     end

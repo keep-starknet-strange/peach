@@ -6,12 +6,17 @@ defmodule PeachWeb.EventController do
       {:ok, event} ->
         conn
         |> put_status(:created)
-        |> json(%{message: "Event created successfully", event: event.name})
+        |> json(%{message: "Event created successfully", event_id: event.id})
 
       {:error, changeset} ->
+        errors =
+          Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} ->
+            Phoenix.Naming.humanize(msg)
+          end)
+
         conn
         |> put_status(:unprocessable_entity)
-        |> json(%{errors: changeset})
+        |> json(%{errors: errors})
     end
   end
 end

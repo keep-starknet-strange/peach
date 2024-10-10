@@ -37,6 +37,8 @@ defmodule Peach.DataCase do
   """
   def setup_sandbox(tags) do
     pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Peach.Repo, shared: not tags[:async])
+    # Reset the sequence for the `events` table before each test
+    Peach.Repo.query!("ALTER SEQUENCE events_id_seq RESTART WITH 1")
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 

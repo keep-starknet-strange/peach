@@ -10,6 +10,7 @@ defmodule Peach.Event do
     field :location, :string
     field :cover, :string
     field :onchain, :boolean, default: false
+    field :treasury, :string
 
     has_many :ticket_tiers, Peach.TicketTier
 
@@ -19,8 +20,9 @@ defmodule Peach.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:name, :description, :location, :date, :cover])
-    |> cast_assoc(:ticket_tiers, with: &Peach.TicketTier.changeset/2)
-    |> validate_required([:name, :description, :location, :date, :cover])
+    |> cast(attrs, [:name, :description, :location, :date, :cover, :treasury])
+    |> cast_assoc(:ticket_tiers, with: &Peach.TicketTier.changeset/2, required: true)
+    |> validate_required([:name, :description, :location, :date, :cover, :treasury])
+    |> validate_format(:treasury, ~r/^0x[0-9a-fA-F]{1,64}$/)
   end
 end
