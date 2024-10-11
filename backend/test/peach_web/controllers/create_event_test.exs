@@ -1,4 +1,4 @@
-defmodule PeachWeb.EventControllerTest do
+defmodule PeachWeb.EventCreateControllerTest do
   use PeachWeb.ConnCase, async: true
 
   import Ecto.Query
@@ -29,7 +29,7 @@ defmodule PeachWeb.EventControllerTest do
   }
 
   test "creates an event with ticket tiers", %{conn: conn} do
-    conn = post(conn, "/api/create_event", %{"event" => @valid_event_attrs})
+    conn = post(conn, "/api/events/create", %{"event" => @valid_event_attrs})
 
     # Assert response status
     assert json_response(conn, 201)["message"] == "Event created successfully"
@@ -57,14 +57,14 @@ defmodule PeachWeb.EventControllerTest do
       # Remove one required field at a time
       invalid_attrs = Map.drop(@valid_event_attrs, [field])
 
-      conn = post(conn, "/api/create_event", %{"event" => invalid_attrs})
+      conn = post(conn, "/api/events/create", %{"event" => invalid_attrs})
 
       assert json_response(conn, 422)["errors"][field] == ["Can't be blank"]
     end)
 
     # Test with an empty ticket tier list
     empty_tiers = Map.replace(@valid_event_attrs, "ticket_tiers", [])
-    conn = post(conn, "/api/create_event", %{"event" => empty_tiers})
+    conn = post(conn, "/api/events/create", %{"event" => empty_tiers})
 
     assert json_response(conn, 422)["errors"]["ticket_tiers"] == ["Can't be blank"]
   end
@@ -85,7 +85,7 @@ defmodule PeachWeb.EventControllerTest do
             Map.replace(@valid_event_attrs, field, true)
         end
 
-      conn = post(conn, "/api/create_event", %{"event" => invalid_attrs})
+      conn = post(conn, "/api/events/create", %{"event" => invalid_attrs})
 
       assert json_response(conn, 422)["errors"][field] == ["Is invalid"]
     end)
@@ -94,7 +94,7 @@ defmodule PeachWeb.EventControllerTest do
     invalid_address_format =
       Map.replace(@valid_event_attrs, "treasury", "Some string that is not a starknet address")
 
-    conn = post(conn, "/api/create_event", %{"event" => invalid_address_format})
+    conn = post(conn, "/api/events/create", %{"event" => invalid_address_format})
 
     assert json_response(conn, 422)["errors"]["treasury"] == ["Has invalid format"]
   end

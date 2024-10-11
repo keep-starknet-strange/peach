@@ -28,4 +28,11 @@ defmodule Peach.Event do
     |> validate_required([:name, :description, :location, :date, :cover, :treasury])
     |> validate_format(:treasury, ~r/^0x[0-9a-fA-F]{1,64}$/)
   end
+
+  def update_changeset(event, attrs) do
+    event
+    |> cast(attrs, [:name, :description, :location, :date, :cover, :treasury])
+    |> validate_required([:name, :description, :location, :date, :cover, :treasury])
+    |> validate_format(:treasury, ~r/^0x[0-9a-fA-F]{1,64}$/)
+  end
 end

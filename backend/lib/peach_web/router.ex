@@ -7,7 +7,12 @@ defmodule PeachWeb.Router do
 
   scope "/api", PeachWeb do
     pipe_through(:api)
-    post "/create_event", EventController, :create
+    post "/events/create", EventController, :create
+    put "/events/:id/name", EventController, :update_event_name
+    put "/events/:id/description", EventController, :update_event_description
+    put "/events/:id/location", EventController, :update_event_location
+    put "/events/:id/cover", EventController, :update_event_cover
+    put "/events/:id/treasury", EventController, :update_event_treasury
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
