@@ -34,7 +34,7 @@ defmodule PeachWeb.EventUpdateControllertest do
     expected_event = @original_event
 
     Enum.reduce(updated_fields, expected_event, fn {field, value}, acc ->
-      conn = put(conn, "/api/events/1/#{field}", %{"#{field}" => value})
+      conn = patch(conn, "/api/events/1/#{field}", %{"#{field}" => value})
       acc = Map.replace(acc, String.to_atom(field), value)
 
       # Assert response status
@@ -62,7 +62,7 @@ defmodule PeachWeb.EventUpdateControllertest do
     expected_event = @original_event
 
     Enum.each(updated_fields, fn {field, value} ->
-      conn = put(conn, "/api/events/1/#{field}", %{"#{field}" => value})
+      conn = patch(conn, "/api/events/1/#{field}", %{"#{field}" => value})
 
       # Assert response status
       assert conn.status == 400
