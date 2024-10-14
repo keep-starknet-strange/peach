@@ -13,6 +13,7 @@ defmodule PeachWeb.Router do
     patch "/events/:id/location", EventController, :update_event_location
     patch "/events/:id/cover", EventController, :update_event_cover
     patch "/events/:id/treasury", EventController, :update_event_treasury
+    get "/tickets/:address", TicketController, :get_tickets_with_event_by_address
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

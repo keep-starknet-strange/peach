@@ -7,8 +7,8 @@ defmodule Peach.Ticket do
 
   schema "tickets" do
     field :owner, :string
-    field :balance, :integer
-    field :tier_id, :id
+
+    belongs_to :ticket_tier, Peach.TicketTier
 
     timestamps(type: :utc_datetime)
   end
@@ -16,8 +16,8 @@ defmodule Peach.Ticket do
   @doc false
   def changeset(ticket, attrs) do
     ticket
-    |> cast(attrs, [:owner, :balance, :tier_id])
-    |> validate_required([:owner, :balance, :tier_id])
-    |> validate_length(:owner, max: 66)
+    |> cast(attrs, [:owner])
+    |> validate_required([:owner])
+    |> validate_format(:owner, ~r/^0x[0-9a-fA-F]{1,64}$/)
   end
 end
