@@ -6,7 +6,8 @@ defmodule Peach.Repo.Migrations.CreateEvents do
       add :name, :string
       add :description, :string
       add :location, :string
-      add :date, :utc_datetime
+      add :start, :utc_datetime
+      add :end, :utc_datetime
       add :cover, :string
       add :onchain, :boolean, default: false
       add :treasury, :string

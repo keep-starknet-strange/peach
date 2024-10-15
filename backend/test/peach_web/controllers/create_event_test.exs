@@ -9,7 +9,8 @@ defmodule PeachWeb.EventCreateControllerTest do
 
   @valid_event_attrs %{
     "name" => "Blockchain Conference",
-    "date" => "2024-11-10T10:00:00",
+    "start" => "2024-11-10T10:00:00",
+    "end" => "2024-11-10T13:00:00",
     "description" => "A conference about blockchain technology.",
     "location" => "San Francisco, CA",
     "cover" => "https://example.com/cover.jpg",
@@ -51,7 +52,7 @@ defmodule PeachWeb.EventCreateControllerTest do
   end
 
   test "returns error when required fields are missing", %{conn: conn} do
-    required_fields = ["name", "date", "description", "location", "cover", "ticket_tiers"]
+    required_fields = ["name", "start", "end", "description", "location", "cover", "ticket_tiers"]
 
     Enum.each(required_fields, fn field ->
       # Remove one required field at a time
@@ -70,7 +71,7 @@ defmodule PeachWeb.EventCreateControllerTest do
   end
 
   test "returns error when fields are in the wrong format", %{conn: conn} do
-    required_fields = ["name", "date", "description", "location", "cover", "ticket_tiers"]
+    required_fields = ["name", "start", "end", "description", "location", "cover", "ticket_tiers"]
 
     Enum.each(required_fields, fn field ->
       invalid_attrs =

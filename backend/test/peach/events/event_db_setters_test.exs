@@ -10,7 +10,8 @@ defmodule Peach.Events.EventDBSettersTest do
     {:ok, event} =
       Repo.insert(%Event{
         name: "Original Name",
-        date: ~N[2024-01-01 10:00:00],
+        start: ~N[2024-01-01 10:00:00],
+        end: ~N[2024-01-01 15:00:00],
         description: "Original description",
         location: "Original location",
         cover: "https://example.com/original_cover.jpg",
@@ -31,14 +32,24 @@ defmodule Peach.Events.EventDBSettersTest do
     assert updated_event.name == updated_name
   end
 
-  test "updates date in the database", %{event: event} do
+  test "updates end date in the database", %{event: event} do
     new_date = ~N[2025-12-31 23:59:59]
-    Events.update_event_date(event.id, new_date)
+    Events.update_event_end(event.id, new_date)
     updated_event = Repo.get!(Event, event.id)
-    assert updated_event.date == new_date
-    Events.update_event_date(event.id, 1)
+    assert updated_event.end == new_date
+    Events.update_event_end(event.id, 1)
     updated_event = Repo.get!(Event, event.id)
-    assert updated_event.date == new_date
+    assert updated_event.end == new_date
+  end
+
+  test "updates start date in the database", %{event: event} do
+    new_date = ~N[2024-01-01 11:00:00]
+    Events.update_event_start(event.id, new_date)
+    updated_event = Repo.get!(Event, event.id)
+    assert updated_event.start == new_date
+    Events.update_event_start(event.id, 1)
+    updated_event = Repo.get!(Event, event.id)
+    assert updated_event.start == new_date
   end
 
   test "updates description in the database", %{event: event} do
