@@ -22,41 +22,15 @@ defmodule PeachWeb.EventController do
   end
 
   def events(conn, params) do
-    with {:ok, after_datetime} <- validate_datetime(Map.get(params, "after_datetime")),
-         {:ok, after_event_id} <-
-           validate_integer(Map.get(params, "after_event_id", 0), "after_event_id"),
-         {:ok, first} <- validate_integer(Map.get(params, "first", 50), "first") do
-      # Fetch events and map them to desired structure
-      events =
-        Events.get_events(after_datetime, after_event_id, first)
-        |> Enum.map(&format_event/1)
+    # Fetch events and map them to desired structure
+    case Events.get_events(params) do
+      {:ok, events} ->
+        Enum.map(events, &format_event/1)
 
-      conn
-      |> put_status(:ok)
-      |> json(%{events: events})
-    else
       {:error, error} ->
         conn
         |> put_status(:unprocessable_entity)
         |> json(%{errors: error})
-    end
-  end
-
-  defp validate_datetime(nil), do: {:error, %{after_datetime: "Can't be blank"}}
-
-  defp validate_datetime(datetime_str) do
-    case NaiveDateTime.from_iso8601(datetime_str) do
-      {:ok, datetime} -> {:ok, datetime}
-      {:error, reason} -> {:error, %{after_datetime: reason}}
-    end
-  end
-
-  defp validate_integer(value, _field) when is_integer(value), do: {:ok, value}
-
-  defp validate_integer(value, field) do
-    case Integer.parse(value) do
-      {int, ""} -> {:ok, int}
-      _ -> {:error, %{field => "invalid_type"}}
     end
   end
 

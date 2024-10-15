@@ -6,6 +6,9 @@ defmodule Peach.Events do
   alias Peach.Repo
   import Ecto.Query
 
+  @default_limit 50
+  @default_event_id 0
+
   @doc """
   Creates an event with the given attributes.
   """
@@ -18,13 +21,73 @@ defmodule Peach.Events do
   @doc """
   Returns the `first` events that end after `after_time` and their id is after `after_event_id`
   """
-  def get_events(after_datetime, after_event_id, first) do
-    Repo.all(
-      from e in Event,
-        where: e.end >= ^after_datetime and e.id > ^after_event_id,
-        order_by: [asc: e.start, asc: e.id],
-        limit: ^first
-    )
+  def get_events(%{after_datetime: after_datetime, after_event_id: after_event_id, first: first})
+      when is_integer(after_event_id) and
+             is_integer(first) do
+    case NaiveDateTime.from_iso8601(after_datetime) do
+      {:ok, datetime} ->
+        {:ok,
+         Repo.all(
+           from e in Event,
+             where: e.end >= ^datetime and e.id > ^after_event_id,
+             order_by: [asc: e.start, asc: e.id],
+             limit: ^first
+         )}
+
+      {:error, error} ->
+        {:error, %{after_datetime: error}}
+    end
+  end
+
+  def get_events(%{after_datetime: after_datetime, after_event_id: after_event_id})
+      when is_integer(after_event_id) do
+    {:ok,
+     Repo.all(
+       from e in Event,
+         where: e.end >= ^after_datetime and e.id > ^after_event_id,
+         order_by: [asc: e.start, asc: e.id],
+         limit: @default_limit
+     )}
+  end
+
+  def get_events(%{after_datetime: after_datetime, limit: limit})
+      when is_integer(limit) do
+    {:ok,
+     Repo.all(
+       from e in Event,
+         where: e.end >= ^after_datetime and e.id > @default_event_id,
+         order_by: [asc: e.start, asc: e.id],
+         limit: ^limit
+     )}
+  end
+
+  def get_events(%{after_datetime: after_datetime}) do
+    case NaiveDateTime.from_iso8601(after_datetime) do
+      {:ok, datetime} ->
+        {:ok,
+         Repo.all(
+           from e in Event,
+             where: e.end >= ^datetime and e.id > @default_event_id,
+             order_by: [asc: e.start, asc: e.id],
+             limit: @default_limit
+         )}
+
+      {:error, error} ->
+        {:error, %{after_datetime: error}}
+    end
+  end
+
+  def get_events(%{after_datetime: _after_datetime, limit: _limit}) do
+    {:error, %{limit: "incorrect_type"}}
+  end
+
+  def get_events(%{after_datetime: _after_datetime, after_event_id: _after_event_id}) do
+    {:error, %{after_event_id: "incorrect_type"}}
+  end
+
+  def get_events(params) do
+    IO.inspect(params)
+    {:error, %{after_datetime: "Can't be blank"}}
   end
 
   @doc """
