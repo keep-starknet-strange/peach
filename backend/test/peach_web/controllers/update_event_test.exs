@@ -6,7 +6,8 @@ defmodule PeachWeb.EventUpdateControllertest do
 
   @original_event %Event{
     name: "Original Name",
-    date: ~N[2024-01-01 10:00:00],
+    start: ~N[2024-01-01 10:00:00],
+    end: ~N[2024-01-01 16:00:00],
     description: "Original description",
     location: "Original location",
     cover: "https://example.com/original_cover.jpg",
@@ -28,6 +29,8 @@ defmodule PeachWeb.EventUpdateControllertest do
       {"description", "Updated description"},
       {"location", "Updated location"},
       {"treasury", "0xbeef"},
+      {"start", "2024-01-01T11:00:00"},
+      {"end", "2024-01-01T13:00:00"},
       {"cover", "https://example.com/updated_cover.jpg"}
     ]
 
@@ -56,6 +59,10 @@ defmodule PeachWeb.EventUpdateControllertest do
       {"description", 2},
       {"location", 3},
       {"treasury", "wrong treasury format"},
+      {"treasury", 1},
+      {"start", "~N[2024-01-01 14:00:00]"},
+      {"start", "2024-01-02T10:00:00"},
+      {"end", "wrong type"},
       {"cover", 4}
     ]
 

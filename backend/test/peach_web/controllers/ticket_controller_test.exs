@@ -7,7 +7,8 @@ defmodule PeachWeb.TicketControllerTest do
     event =
       Repo.insert!(%Event{
         name: "Blockchain Conference",
-        date: ~N[2024-11-10 00:00:00],
+        start: ~N[2024-11-10 00:00:00],
+        end: ~N[2024-11-10 08:00:00],
         description: "A blockchain event",
         location: "San Francisco, CA",
         cover: "https://example.com/cover.jpg",
@@ -77,7 +78,8 @@ defmodule PeachWeb.TicketControllerTest do
         %{
           "name" => "Blockchain Conference",
           "location" => "San Francisco, CA",
-          "date" => "2024-11-10T00:00:00",
+          "start" => "2024-11-10T00:00:00",
+          "end" => "2024-11-10T08:00:00",
           "cover" => "https://example.com/cover.jpg",
           "tickets" => [
             %{

@@ -8,7 +8,8 @@ defmodule Peach.Event do
   @derive Jason.Encoder
   schema "events" do
     field :name, :string
-    field :date, :naive_datetime
+    field :start, :naive_datetime
+    field :end, :naive_datetime
     field :description, :string
     field :location, :string
     field :cover, :string
@@ -23,16 +24,29 @@ defmodule Peach.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:name, :description, :location, :date, :cover, :treasury])
+    |> cast(attrs, [:name, :description, :location, :start, :end, :cover, :treasury])
     |> cast_assoc(:ticket_tiers, with: &Peach.TicketTier.changeset/2, required: true)
-    |> validate_required([:name, :description, :location, :date, :cover, :treasury])
+    |> validate_required([:name, :description, :location, :start, :end, :cover, :treasury])
     |> validate_format(:treasury, ~r/^0x[0-9a-fA-F]{1,64}$/)
+    |> validate_end_after_start()
   end
 
   def update_changeset(event, attrs) do
     event
-    |> cast(attrs, [:name, :description, :location, :date, :cover, :treasury])
-    |> validate_required([:name, :description, :location, :date, :cover, :treasury])
+    |> cast(attrs, [:name, :description, :location, :start, :end, :cover, :treasury])
+    |> validate_required([:name, :description, :location, :start, :end, :cover, :treasury])
     |> validate_format(:treasury, ~r/^0x[0-9a-fA-F]{1,64}$/)
+    |> validate_end_after_start()
+  end
+
+  defp validate_end_after_start(changeset) do
+    start_time = get_field(changeset, :start)
+    end_time = get_field(changeset, :end)
+
+    if start_time && end_time && NaiveDateTime.compare(end_time, start_time) != :gt do
+      add_error(changeset, :end, "must be after the start date and time")
+    else
+      changeset
+    end
   end
 end

@@ -9,7 +9,7 @@ defmodule PeachWeb.TicketController do
     # Group tickets by event and then by tier_id within each event
     events_with_tickets =
       tickets
-      |> Enum.group_by(fn ticket -> ticket.ticket_tier.event end)
+      |> Enum.group_by(& &1.ticket_tier.event)
       |> Enum.map(fn {event, tickets} ->
         # Group tickets by tier within each event
         tickets_by_tier =
@@ -27,7 +27,8 @@ defmodule PeachWeb.TicketController do
         %{
           "name" => event.name,
           "location" => event.location,
-          "date" => event.date,
+          "start" => event.start,
+          "end" => event.end,
           "cover" => event.cover,
           "tickets" => tickets_by_tier
         }
