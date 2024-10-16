@@ -33,12 +33,11 @@ defmodule PeachWeb.TicketControllerTest do
       })
 
     # Create tickets for the user address associated with the tiers
-    vip_ticket =
-      Repo.insert!(%Ticket{
-        owner: "0xdead",
-        # Using tier_id from the association
-        ticket_tier_id: vip_tier.id
-      })
+    Repo.insert!(%Ticket{
+      owner: "0xdead",
+      # Using tier_id from the association
+      ticket_tier_id: vip_tier.id
+    })
 
     # Create tickets for the user address associated with the tiers
     vip_ticket =
@@ -48,11 +47,10 @@ defmodule PeachWeb.TicketControllerTest do
         ticket_tier_id: vip_tier.id
       })
 
-    standard_ticket =
-      Repo.insert!(%Ticket{
-        owner: "0xdead",
-        ticket_tier_id: standard_tier.id
-      })
+    Repo.insert!(%Ticket{
+      owner: "0xdead",
+      ticket_tier_id: standard_tier.id
+    })
 
     standard_ticket =
       Repo.insert!(%Ticket{
