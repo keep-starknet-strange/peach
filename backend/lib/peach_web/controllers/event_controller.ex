@@ -25,7 +25,9 @@ defmodule PeachWeb.EventController do
     # Fetch events and map them to desired structure
     case Events.get_events(params) do
       {:ok, events} ->
-        Enum.map(events, &format_event/1)
+        conn
+        |> put_status(:ok)
+        |> json(%{events: Enum.map(events, &format_event/1)})
 
       {:error, error} ->
         conn

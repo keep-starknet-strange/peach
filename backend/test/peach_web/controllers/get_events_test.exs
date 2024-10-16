@@ -70,12 +70,43 @@ defmodule PeachWeb.GetEventControllerTest do
   test "returns validation error for non-integer after_event_id", %{conn: conn} do
     after_datetime = "2024-11-08T00:00:00"
     after_event_id = "not-an-integer"
+    first = 10
 
     conn =
       get(conn, "/api/events?after_datetime=#{after_datetime}&after_event_id=#{after_event_id}")
 
     response = json_response(conn, 422)
     assert response["errors"]["after_event_id"] == "invalid_type"
+
+    conn =
+      get(
+        conn,
+        "/api/events?after_datetime=#{after_datetime}&after_event_id=#{after_event_id}&first=#{first}"
+      )
+
+    response = json_response(conn, 422)
+    assert response["errors"]["after_event_id"] == "invalid_type"
+  end
+
+  test "returns validation error for non-integer first", %{conn: conn} do
+    after_datetime = "2024-11-08T00:00:00"
+    after_event_id = 1
+    first = "not an integer"
+
+    conn =
+      get(conn, "/api/events?after_datetime=#{after_datetime}&first=#{first}")
+
+    response = json_response(conn, 422)
+    assert response["errors"]["first"] == "invalid_type"
+
+    conn =
+      get(
+        conn,
+        "/api/events?after_datetime=#{after_datetime}&after_event_id=#{after_event_id}&first=#{first}"
+      )
+
+    response = json_response(conn, 422)
+    assert response["errors"]["first"] == "invalid_type"
   end
 
   test "limits the number of events returned with first param", %{conn: conn, event2: event2} do
