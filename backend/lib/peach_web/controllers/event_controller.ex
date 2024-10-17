@@ -26,7 +26,7 @@ defmodule PeachWeb.EventController do
       {:ok, events} ->
         conn
         |> put_status(:ok)
-        |> json(%{events: Enum.map(events, &format_event/1)})
+        |> json(%{events: events})
 
       {:error, error} ->
         conn
@@ -34,17 +34,6 @@ defmodule PeachWeb.EventController do
         |> json(%{errors: error})
     end
   end
-
-  defp format_event(event),
-    do: %{
-      "id" => event.id,
-      "name" => event.name,
-      "description" => event.description,
-      "start" => event.start,
-      "end" => event.end,
-      "location" => event.location,
-      "cover" => event.cover
-    }
 
   @doc """
   Updates the name of an event.

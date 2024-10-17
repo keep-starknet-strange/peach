@@ -5,7 +5,8 @@ defmodule Peach.Event do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive Jason.Encoder
+  @derive {Jason.Encoder,
+           only: [:name, :description, :cover, :start, :end, :location, :treasury, :id]}
   schema "events" do
     field :name, :string
     field :start, :naive_datetime
