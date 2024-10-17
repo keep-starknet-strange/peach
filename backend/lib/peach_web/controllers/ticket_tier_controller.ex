@@ -2,17 +2,11 @@ defmodule PeachWeb.TicketTierController do
   use PeachWeb, :controller
   alias Peach.TicketTiers
 
-  def index(conn, %{"event_id" => event_id}) do
-    case TicketTiers.event_ticket_tiers(event_id) do
-      {:ok, ticket_tiers} ->
-        conn
-        |> put_status(:ok)
-        |> json(%{ticket_tiers: ticket_tiers})
+  def index(conn, %{"id" => event_id}) do
+    ticket_tiers = TicketTiers.event_ticket_tiers(event_id)
 
-      {:error, error} ->
-        conn
-        |> put_status(:unprocessable_entity)
-        |> json(%{errors: error})
-    end
+    conn
+    |> put_status(:ok)
+    |> json(%{ticket_tiers: ticket_tiers})
   end
 end

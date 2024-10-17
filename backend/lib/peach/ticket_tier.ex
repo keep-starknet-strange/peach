@@ -5,7 +5,7 @@ defmodule Peach.TicketTier do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive Jason.Encoder
+  @derive {Jason.Encoder, only: [:id, :name, :description, :max_supply]}
   schema "ticket_tiers" do
     field :name, :string
     field :description, :string

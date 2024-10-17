@@ -2,8 +2,8 @@ defmodule Peach.TicketTiers do
   @moduledoc """
   Manages the events for the peach app
   """
-  alias Peach.TicketTier
   alias Peach.Repo
+  alias Peach.TicketTier
 
   import Ecto.Query
 
