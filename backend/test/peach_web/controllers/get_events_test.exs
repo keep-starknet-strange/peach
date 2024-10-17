@@ -9,7 +9,8 @@ defmodule PeachWeb.GetEventControllerTest do
       Repo.insert!(%Event{
         name: "Past Event",
         start: ~N[2024-11-05 09:00:00],
-        end: ~N[2024-11-06 17:00:00]
+        end: ~N[2024-11-06 17:00:00],
+        treasury: "0xbeef"
       })
 
     event2 =
@@ -23,7 +24,8 @@ defmodule PeachWeb.GetEventControllerTest do
       Repo.insert!(%Event{
         name: "Future Event",
         start: ~N[2024-11-15 09:00:00],
-        end: ~N[2024-11-17 17:00:00]
+        end: ~N[2024-11-17 17:00:00],
+        treasury: "0xbeef"
       })
 
     {:ok, event1: event1, event2: event2, event3: event3}
@@ -121,7 +123,8 @@ defmodule PeachWeb.GetEventControllerTest do
                "start" => NaiveDateTime.to_iso8601(event2.start),
                "end" => NaiveDateTime.to_iso8601(event2.end),
                "location" => event2.location,
-               "cover" => event2.cover
+               "cover" => event2.cover,
+               "treasury" => event2.treasury
              }
            ]
   end
@@ -140,7 +143,8 @@ defmodule PeachWeb.GetEventControllerTest do
           "start" => NaiveDateTime.to_iso8601(event3.start),
           "end" => NaiveDateTime.to_iso8601(event3.end),
           "location" => event3.location,
-          "cover" => event3.cover
+          "cover" => event3.cover,
+          "treasury" => event3.treasury
         }
       ]
 

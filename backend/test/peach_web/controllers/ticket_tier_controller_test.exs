@@ -1,6 +1,6 @@
 defmodule PeachWeb.TicketTierControllerTest do
   use PeachWeb.ConnCase, async: true
-  alias Peach.{Event, Repo, TicketTier}
+  alias Peach.{Event, Repo, Ticket, TicketTier}
 
   setup do
     # Insert a sample event and ticket tiers for testing
@@ -27,7 +27,10 @@ defmodule PeachWeb.TicketTierControllerTest do
         event_id: event.id
       })
 
+    # Create a few tickets associated with this tier
+    _ticket1 = Repo.insert!(%Ticket{ticket_tier_id: vip_tier.id})
     # Pass event and ticket tiers to each test case
+    _ticket2 = Repo.insert!(%Ticket{ticket_tier_id: vip_tier.id})
     {:ok, event: event, vip_tier: vip_tier, standard_tier: standard_tier}
   end
 
@@ -71,5 +74,39 @@ defmodule PeachWeb.TicketTierControllerTest do
 
     # Assert the response status and error message
     assert json_response(conn, 200) == %{"ticket_tiers" => []}
+  end
+
+  test "returns ticket tier with remaining tickets for valid id", %{
+    conn: conn,
+    vip_tier: ticket_tier
+  } do
+    # Call the show endpoint with a valid ticket_tier_id
+    conn = get(conn, "/api/ticket_tiers/#{ticket_tier.id}")
+
+    # Expected response
+    expected_response = %{
+      "ticket_tier" => %{
+        "id" => ticket_tier.id,
+        "name" => ticket_tier.name,
+        "description" => ticket_tier.description,
+        "max_supply" => ticket_tier.max_supply,
+        # Expected remaining tickets (50 - 2 tickets sold)
+        "remaining" => 48
+      }
+    }
+
+    # Assert that the response status is 200 and matches the expected response
+    assert json_response(conn, 200) == expected_response
+  end
+
+  test "returns error for invalid ticket_tier_id", %{conn: conn} do
+    # Call the show endpoint with an invalid ticket_tier_id
+    conn = get(conn, "/api/ticket_tiers/9999")
+
+    # Expected error response (adjust based on your actual error handling)
+    expected_error = %{"errors" => "Ticket tier not found"}
+
+    # Assert the response status and error message
+    assert json_response(conn, 404) == expected_error
   end
 end
