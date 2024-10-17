@@ -107,79 +107,13 @@ defmodule Peach.Events do
   end
 
   @doc """
-  Updates the `name` field
+  Updates the event 
   """
-  def update_event_name(event_id, name) do
-    event = Repo.get!(Event, event_id)
+  def update_event(id, event) do
+    current_event = Repo.get!(Event, id)
 
-    event
-    |> Event.update_changeset(%{name: name})
-    |> Repo.update()
-  end
-
-  @doc """
-  Updates the `description` field
-  """
-  def update_event_description(event_id, description) do
-    event = Repo.get!(Event, event_id)
-
-    event
-    |> Event.update_changeset(%{description: description})
-    |> Repo.update()
-  end
-
-  @doc """
-  Updates the `end` field
-  """
-  def update_event_end(event_id, end_date) do
-    event = Repo.get!(Event, event_id)
-
-    event
-    |> Event.update_changeset(%{end: end_date})
-    |> Repo.update()
-  end
-
-  @doc """
-  Updates the `start` field
-  """
-  def update_event_start(event_id, start) do
-    event = Repo.get!(Event, event_id)
-
-    event
-    |> Event.update_changeset(%{start: start})
-    |> Repo.update()
-  end
-
-  @doc """
-  Updates the `location` field
-  """
-  def update_event_location(event_id, location) do
-    event = Repo.get!(Event, event_id)
-
-    event
-    |> Event.update_changeset(%{location: location})
-    |> Repo.update()
-  end
-
-  @doc """
-  Updates the `cover` field
-  """
-  def update_event_cover(event_id, cover) do
-    event = Repo.get!(Event, event_id)
-
-    event
-    |> Event.update_changeset(%{cover: cover})
-    |> Repo.update()
-  end
-
-  @doc """
-  Updates the `treasury` field
-  """
-  def update_event_treasury(event_id, treasury) do
-    event = Repo.get!(Event, event_id)
-
-    event
-    |> Event.update_changeset(%{treasury: treasury})
+    current_event
+    |> Event.update_changeset(event)
     |> Repo.update()
   end
 end
