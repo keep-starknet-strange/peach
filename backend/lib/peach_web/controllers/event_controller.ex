@@ -21,8 +21,7 @@ defmodule PeachWeb.EventController do
     end
   end
 
-  def events(conn, params) do
-    # Fetch events and map them to desired structure
+  def index(conn, params) do
     case Events.get_events(params) do
       {:ok, events} ->
         conn
@@ -50,134 +49,8 @@ defmodule PeachWeb.EventController do
   @doc """
   Updates the name of an event.
   """
-  def update_event_name(conn, %{"id" => id, "name" => name}) do
-    case Events.update_event_name(id, name) do
-      {:ok, _event} ->
-        conn
-        |> put_status(:no_content)
-
-      {:error, changeset} ->
-        errors =
-          Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} ->
-            Phoenix.Naming.humanize(msg)
-          end)
-
-        conn
-        |> put_status(:bad_request)
-        |> json(%{errors: errors})
-    end
-  end
-
-  @doc """
-  Updates the starting datetime of an event.
-  """
-  def update_event_start(conn, %{"id" => id, "start" => start}) do
-    case Events.update_event_start(id, start) do
-      {:ok, _event} ->
-        conn
-        |> put_status(:no_content)
-
-      {:error, changeset} ->
-        errors =
-          Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} ->
-            Phoenix.Naming.humanize(msg)
-          end)
-
-        conn
-        |> put_status(:bad_request)
-        |> json(%{errors: errors})
-    end
-  end
-
-  @doc """
-  Updates the ending datetime of an event.
-  """
-  def update_event_end(conn, %{"id" => id, "end" => end_date}) do
-    case Events.update_event_end(id, end_date) do
-      {:ok, _event} ->
-        conn
-        |> put_status(:no_content)
-
-      {:error, changeset} ->
-        errors =
-          Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} ->
-            Phoenix.Naming.humanize(msg)
-          end)
-
-        conn
-        |> put_status(:bad_request)
-        |> json(%{errors: errors})
-    end
-  end
-
-  @doc """
-  Updates the description of an event.
-  """
-  def update_event_description(conn, %{"id" => id, "description" => description}) do
-    case Events.update_event_description(id, description) do
-      {:ok, _event} ->
-        conn
-        |> put_status(:no_content)
-
-      {:error, changeset} ->
-        errors =
-          Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} ->
-            Phoenix.Naming.humanize(msg)
-          end)
-
-        conn
-        |> put_status(:bad_request)
-        |> json(%{errors: errors})
-    end
-  end
-
-  @doc """
-  Updates the location of an event.
-  """
-  def update_event_location(conn, %{"id" => id, "location" => location}) do
-    case Events.update_event_location(id, location) do
-      {:ok, _event} ->
-        conn
-        |> put_status(:no_content)
-
-      {:error, changeset} ->
-        errors =
-          Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} ->
-            Phoenix.Naming.humanize(msg)
-          end)
-
-        conn
-        |> put_status(:bad_request)
-        |> json(%{errors: errors})
-    end
-  end
-
-  @doc """
-  Updates the cover of an event.
-  """
-  def update_event_cover(conn, %{"id" => id, "cover" => cover}) do
-    case Events.update_event_cover(id, cover) do
-      {:ok, _event} ->
-        conn
-        |> put_status(:no_content)
-
-      {:error, changeset} ->
-        errors =
-          Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} ->
-            Phoenix.Naming.humanize(msg)
-          end)
-
-        conn
-        |> put_status(:bad_request)
-        |> json(%{errors: errors})
-    end
-  end
-
-  @doc """
-  Updates the treasury of an event.
-  """
-  def update_event_treasury(conn, %{"id" => id, "treasury" => treasury}) do
-    case Events.update_event_treasury(id, treasury) do
+  def update(conn, %{"id" => id, "event" => event_params}) do
+    case Events.update_event(id, event_params) do
       {:ok, _event} ->
         conn
         |> put_status(:no_content)

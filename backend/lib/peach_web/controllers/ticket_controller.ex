@@ -2,7 +2,7 @@ defmodule PeachWeb.TicketController do
   use PeachWeb, :controller
   alias Peach.Tickets
 
-  def get_tickets_with_event_by_address(conn, %{"address" => address}) do
+  def index(conn, %{"address" => address}) do
     # Fetch the tickets with preloaded ticket_tier and event associations
     tickets = Tickets.list_tickets_with_event_by_owner(address)
 
