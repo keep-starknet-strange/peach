@@ -4,6 +4,7 @@ defmodule Peach.Events do
   """
   alias Peach.Event
   alias Peach.Repo
+  alias Peach.TicketTiers
   import Ecto.Query
 
   @default_limit 50
@@ -16,6 +17,13 @@ defmodule Peach.Events do
     %Event{}
     |> Event.changeset(event)
     |> Repo.insert()
+  end
+
+  def remaining_event_tickets(event_id) do
+    Enum.map(TicketTiers.event_ticket_tiers(event_id), fn ticket_tier ->
+      {:ok, remaining} = TicketTiers.remaining_tickets(ticket_tier.id)
+      remaining
+    end)
   end
 
   @doc """
