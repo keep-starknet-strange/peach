@@ -14,6 +14,7 @@ defmodule PeachWeb.EventControllerTest do
       Repo.insert!(%TicketTier{
         name: "VIP",
         description: "Access to VIP areas",
+        price: 10,
         max_supply: 50,
         event_id: event.id
       })
@@ -22,6 +23,7 @@ defmodule PeachWeb.EventControllerTest do
       Repo.insert!(%TicketTier{
         name: "Standard",
         description: "General admission",
+        price: 5,
         max_supply: 200,
         event_id: event.id
       })
@@ -50,6 +52,7 @@ defmodule PeachWeb.EventControllerTest do
           "id" => vip_tier.id,
           "name" => vip_tier.name,
           "description" => vip_tier.description,
+          "price" => 10,
           "max_supply" => vip_tier.max_supply,
           "remaining" => 48
         },
@@ -57,6 +60,7 @@ defmodule PeachWeb.EventControllerTest do
           "id" => standard_tier.id,
           "name" => standard_tier.name,
           "description" => standard_tier.description,
+          "price" => 5,
           "max_supply" => standard_tier.max_supply,
           "remaining" => standard_tier.max_supply
         }

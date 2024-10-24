@@ -1,4 +1,7 @@
 defmodule Starknet do
+  @moduledoc """
+  Binding to call the starknet rust sdk to execute a transaction
+  """
   use Rustler, otp_app: :peach, crate: "starknet"
 
   # Fallback function in case the NIF is not loaded

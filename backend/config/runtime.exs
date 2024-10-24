@@ -20,6 +20,15 @@ if System.get_env("PHX_SERVER") do
   config :peach, PeachWeb.Endpoint, server: true
 end
 
+env = Dotenv.load()
+
+config :peach, Peach.Config,
+  private_key: env.values["PRIVATE_KEY"],
+  address: env.values["ADDRESS"],
+  provider_url: env.values["PROVIDER_URL"],
+  contract_address: env.values["CONTRACT_ADDRESS"],
+  chain_id: env.values["CHAIN_ID"]
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

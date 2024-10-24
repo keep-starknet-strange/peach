@@ -6,6 +6,7 @@ defmodule Peach.Repo.Migrations.CreateTicketTiers do
       add :name, :string
       add :description, :string
       add :max_supply, :integer
+      add :price, :integer
       add :event_id, references(:events, on_delete: :nothing)
 
       timestamps(type: :utc_datetime)

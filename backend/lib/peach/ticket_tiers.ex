@@ -28,6 +28,7 @@ defmodule Peach.TicketTiers do
            id: ticket_tier.id,
            name: ticket_tier.name,
            description: ticket_tier.description,
+           price: ticket_tier.price,
            remaining: ticket_tier.max_supply - sold_tickets,
            max_supply: ticket_tier.max_supply
          }}

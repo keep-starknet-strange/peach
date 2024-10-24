@@ -16,6 +16,7 @@ defmodule PeachWeb.TicketTierControllerTest do
         name: "VIP",
         description: "Access to VIP areas",
         max_supply: 50,
+        price: 10,
         event_id: event.id
       })
 
@@ -24,6 +25,7 @@ defmodule PeachWeb.TicketTierControllerTest do
         name: "Standard",
         description: "General admission",
         max_supply: 200,
+        price: 5,
         event_id: event.id
       })
 
@@ -50,12 +52,14 @@ defmodule PeachWeb.TicketTierControllerTest do
           "id" => vip_tier.id,
           "name" => vip_tier.name,
           "description" => vip_tier.description,
+          "price" => vip_tier.price,
           "max_supply" => vip_tier.max_supply
         },
         %{
           "id" => standard_tier.id,
           "name" => standard_tier.name,
           "description" => standard_tier.description,
+          "price" => standard_tier.price,
           "max_supply" => standard_tier.max_supply
         }
       ]
@@ -68,9 +72,6 @@ defmodule PeachWeb.TicketTierControllerTest do
   test "returns error for invalid event_id", %{conn: conn} do
     # Send the GET request with an invalid event_id
     conn = get(conn, "/api/events/9999/ticket_tiers")
-
-    # Expected error response
-    expected_error = %{"errors" => "Event not found"}
 
     # Assert the response status and error message
     assert json_response(conn, 200) == %{"ticket_tiers" => []}
@@ -90,6 +91,7 @@ defmodule PeachWeb.TicketTierControllerTest do
         "name" => ticket_tier.name,
         "description" => ticket_tier.description,
         "max_supply" => ticket_tier.max_supply,
+        "price" => ticket_tier.price,
         # Expected remaining tickets (50 - 2 tickets sold)
         "remaining" => 48
       }

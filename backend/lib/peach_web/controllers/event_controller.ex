@@ -62,11 +62,11 @@ defmodule PeachWeb.EventController do
         conn
         |> put_status(:not_found)
         |> json(%{errors: "Event not found"})
-       ticket_tier ->
+
+      ticket_tier ->
         conn
         |> put_status(:ok)
         |> json(%{tickets: ticket_tier})
-
     end
   end
 end
