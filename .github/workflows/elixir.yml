@@ -52,8 +52,6 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-    env:
-      MIX_ENV: test
 
     steps:
       - name: Checkout
@@ -78,6 +76,14 @@ jobs:
           mix ecto.drop
           mix ecto.create
           mix ecto.migrate
+
+      - name: Create .env file
+        run: |
+          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> .env
+          echo "ADDRESS=${{ secrets.ADDRESS }}" >> .env
+          echo "PROVIDER_URL=${{ secrets.PROVIDER_URL }}" >> .env
+          echo "CONTRACT_ADDRESS=${{ secrets.CONTRACT_ADDRESS }}" >> .env
+          echo "CHAIN_ID=${{ secrets.CHAIN_ID }}" >> .env
       - name: Run tests
         env:
           MIX_ENV: test

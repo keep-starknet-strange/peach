@@ -51,7 +51,9 @@ defmodule Peach.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.18", only: [:test]}
+      {:excoveralls, "~> 0.18", only: [:test]},
+      {:dotenv, "~> 3.0.0"},
+      {:rustler, "~> 0.35.0"}
     ]
   end
 

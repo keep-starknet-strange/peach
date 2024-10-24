@@ -5,11 +5,12 @@ defmodule Peach.TicketTier do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:id, :name, :description, :max_supply]}
+  @derive {Jason.Encoder, only: [:id, :name, :description, :max_supply, :price]}
   schema "ticket_tiers" do
     field :name, :string
     field :description, :string
     field :max_supply, :integer
+    field :price, :integer
 
     belongs_to :event, Peach.Event
 
@@ -19,7 +20,7 @@ defmodule Peach.TicketTier do
   @doc false
   def changeset(ticket_tier, attrs) do
     ticket_tier
-    |> cast(attrs, [:name, :description, :max_supply])
-    |> validate_required([:name, :description, :max_supply])
+    |> cast(attrs, [:name, :description, :max_supply, :price])
+    |> validate_required([:name, :description, :max_supply, :price])
   end
 end

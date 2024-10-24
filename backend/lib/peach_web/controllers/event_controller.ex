@@ -36,7 +36,7 @@ defmodule PeachWeb.EventController do
   end
 
   @doc """
-  Updates the name of an event.
+  Updates an event.
   """
   def update(conn, %{"id" => id, "event" => event_params}) do
     case Events.update_event(id, event_params) do
@@ -53,6 +53,20 @@ defmodule PeachWeb.EventController do
         conn
         |> put_status(:bad_request)
         |> json(%{errors: errors})
+    end
+  end
+
+  def remaining_event_tickets(conn, %{"id" => id}) do
+    case Events.remaining_event_tickets(id) do
+      [] ->
+        conn
+        |> put_status(:not_found)
+        |> json(%{errors: "Event not found"})
+
+      ticket_tier ->
+        conn
+        |> put_status(:ok)
+        |> json(%{tickets: ticket_tier})
     end
   end
 end

@@ -13,6 +13,7 @@ defmodule PeachWeb.Router do
     get "/tickets/:address", TicketController, :index
     get "/events/:id/ticket_tiers", TicketTierController, :index
     get "/ticket_tiers/:id", TicketTierController, :show
+    get "/events/:id/remaining_tickets", EventController, :remaining_event_tickets
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

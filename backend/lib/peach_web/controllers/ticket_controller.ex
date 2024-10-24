@@ -19,6 +19,7 @@ defmodule PeachWeb.TicketController do
             %{
               "tier_id" => tier.id,
               "name" => tier.name,
+              "price" => tier.price,
               "description" => tier.description,
               "ticket_ids" => Enum.map(tickets, & &1.id) |> Enum.sort()
             }

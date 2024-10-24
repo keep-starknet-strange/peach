@@ -2,20 +2,55 @@ defmodule Peach.Events do
   @moduledoc """
   Manages the events for the peach app
   """
+  alias Peach.CalldataBuilder
+  alias Peach.Config
   alias Peach.Event
   alias Peach.Repo
+  alias Peach.TicketTiers
   import Ecto.Query
 
   @default_limit 50
   @default_event_id 0
 
+  @selector "0x005b3134506a8ff22ce883984545296af6e65577777882051fa04dc6ecb84e99"
+
   @doc """
   Creates an event with the given attributes.
   """
   def create_event(event \\ %{}) do
-    %Event{}
-    |> Event.changeset(event)
-    |> Repo.insert()
+    event =
+      %Event{}
+      |> Event.changeset(event)
+      |> Repo.insert()
+
+    case event do
+      {:ok, real_event} ->
+        calls = {
+          Config.contract_address(),
+          @selector,
+          CalldataBuilder.build_calldata(real_event)
+        }
+
+        Starknet.execute_tx(
+          Config.provider_url(),
+          Config.private_key(),
+          Config.address(),
+          Config.chain_id(),
+          [calls]
+        )
+
+      err ->
+        err
+    end
+
+    event
+  end
+
+  def remaining_event_tickets(event_id) do
+    Enum.map(TicketTiers.event_ticket_tiers(event_id), fn ticket_tier ->
+      {:ok, remaining} = TicketTiers.remaining_tickets(ticket_tier.id)
+      remaining
+    end)
   end
 
   @doc """

@@ -19,11 +19,13 @@ defmodule PeachWeb.EventCreateControllerTest do
       %{
         "name" => "General Admission",
         "description" => "Access to all sessions",
+        "price" => 5,
         "max_supply" => 100
       },
       %{
         "name" => "VIP",
         "description" => "Access to VIP sessions and perks",
+        "price" => 10,
         "max_supply" => 20
       }
     ]

@@ -21,6 +21,7 @@ defmodule PeachWeb.TicketControllerTest do
         name: "VIP",
         description: "Access to VIP sessions",
         max_supply: 100,
+        price: 10,
         event_id: event.id
       })
 
@@ -29,6 +30,7 @@ defmodule PeachWeb.TicketControllerTest do
         name: "Standard",
         description: "General admission",
         max_supply: 200,
+        price: 5,
         event_id: event.id
       })
 
@@ -84,12 +86,14 @@ defmodule PeachWeb.TicketControllerTest do
               "tier_id" => vip_ticket.ticket_tier_id,
               "name" => "VIP",
               "description" => "Access to VIP sessions",
+              "price" => 10,
               "ticket_ids" => [1, 2]
             },
             %{
               "tier_id" => standard_ticket.ticket_tier_id,
               "name" => "Standard",
               "description" => "General admission",
+              "price" => 5,
               "ticket_ids" => [3]
             }
           ]
