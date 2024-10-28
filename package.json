@@ -1,0 +1,62 @@
+{
+  "name": "peach-fm",
+  "version": "0.0.0",
+  "dependencies": {
+    "@babel/runtime": "7.18.9",
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@manypkg/cli": "^0.19.2",
+    "@types/react": "^18.0.15",
+    "dotenv-cli": "^7.0.0",
+    "eslint": "8.44.0",
+    "husky": "8.0.3",
+    "lint-staged": "^13.1.0",
+    "moti": "0.29.0",
+    "prettier": "3.3.3",
+    "prettier-plugin-organize-imports": "4.1.0",
+    "syncpack": "^8.5.14",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": "=18.12.1",
+    "yarn": ">=3.2.3",
+    "npm": "please-use-yarn"
+  },
+  "manypkg": {
+    "ignoredRules": [
+      "INTERNAL_MISMATCH"
+    ]
+  },
+  "packageManager": "yarn@3.6.4",
+  "private": true,
+  "scripts": {
+    "g:build": "turbo run build --concurrency=100%",
+    "g:check:deps": "manypkg check",
+    "g:check:circular": "turbo run check:circular --parallel",
+    "g:format:deps": "syncpack format",
+    "g:lint": "turbo run lint --parallel",
+    "g:lint:fix": "turbo run lint:fix --parallel",
+    "g:rm:nodemodules": "rm -rf node_modules",
+    "g:run-fast-checks": "turbo run typecheck lint build --parallel",
+    "g:run-all-checks": "turbo run typecheck lint test build check:circular --parallel",
+    "g:test": "turbo run test --parallel",
+    "g:snapshots": "turbo run snapshots --parallel",
+    "g:typecheck": "turbo run typecheck --parallel",
+    "lfg": "yarn && yarn mobile env:local:download && yarn g:build && yarn mobile pod && yarn mobile ios",
+    "mobile": "yarn workspace @peach/mobile",
+    "postinstall": "husky install",
+    "staged:lint:fix": "eslint --fix",
+    "upgrade:tamagui": "yarn up '*tamagui*' '@tamagui/*'",
+    "upgrade:tamagui:canary": "yarn up '*tamagui*'@canary '@tamagui/*'@canary",
+    "utilities": "yarn workspace utilities"
+  },
+  "workspaces": [
+    "apps/*",
+    "config/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "react-native-monorepo-tools": "1.2.1",
+    "react-native-svg-transformer": "1.5.0"
+  }
+}

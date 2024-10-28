@@ -122,9 +122,12 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# yarn v2
+# turbo
+.turbo
+
+# .yarn files
 .yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
+.yarn/versions
 .yarn/install-state.gz
-.pnp.*
+
+dist/out-tsc/*
