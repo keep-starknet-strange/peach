@@ -48,6 +48,8 @@
     "staged:lint:fix": "eslint --fix",
     "upgrade:tamagui": "yarn up '*tamagui*' '@tamagui/*'",
     "upgrade:tamagui:canary": "yarn up '*tamagui*'@canary '@tamagui/*'@canary",
+    "ui": "yarn workspace ui",
+    "peach": "yarn workspace peach",
     "utilities": "yarn workspace utilities"
   },
   "workspaces": [

@@ -1,6 +1,4 @@
-import {
-  SN_NETWORK_NAME,
-} from 'react-native-dotenv'
+import { SN_NETWORK_NAME } from 'react-native-dotenv'
 import { isNonJestDev } from 'utilities/src/environment/constants'
 
 /**

@@ -1,4 +1,5 @@
 export { RemoveScroll } from '@tamagui/remove-scroll'
+export { ImpactFeedbackStyle } from 'expo-haptics'
 export {
   Accordion,
   Anchor,
@@ -56,7 +57,6 @@ export { Flex, Inset, Separator, flexStyles, type FlexProps } from './components
 export * from './components/text'
 export { useIsDarkMode } from './hooks/useIsDarkMode'
 export { useSporeColors, type DynamicColor } from './hooks/useSporeColors'
-export { ImpactFeedbackStyle } from 'expo-haptics'
 export * from './utils/haptics/useHapticFeedback'
 
 // Theme

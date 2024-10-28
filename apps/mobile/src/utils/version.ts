@@ -1,6 +1,6 @@
+import { StatsigEnvironmentTier } from 'peach/src/version'
 import DeviceInfo from 'react-native-device-info'
 import { isBetaEnv, isDevEnv } from 'utilities/src/environment/env'
-import { StatsigEnvironmentTier } from 'peach/src/version'
 
 /**
  * Returns a string with the app version and build number in the format:

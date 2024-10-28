@@ -1,9 +1,9 @@
 import type { Middleware, PreloadedState } from '@reduxjs/toolkit'
+import { createStore } from 'peach/src/state'
 import { MMKV } from 'react-native-mmkv'
 import { Storage, persistReducer, persistStore } from 'redux-persist'
 import { MobileState, mobilePersistedStateList, mobileReducer } from 'src/app/mobileReducer'
 import { isNonJestDev } from 'utilities/src/environment/constants'
-import { createStore } from 'peach/src/state'
 
 const storage = new MMKV()
 

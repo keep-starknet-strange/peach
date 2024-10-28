@@ -7,8 +7,6 @@ const mobileReducers = {
 
 export const mobileReducer = combineReducers(mobileReducers)
 
-export const mobilePersistedStateList: Array<keyof typeof mobileReducers> = [
-  ...appPersistedStateList,
-]
+export const mobilePersistedStateList: Array<keyof typeof mobileReducers> = [...appPersistedStateList]
 
 export type MobileState = ReturnType<typeof mobileReducer>

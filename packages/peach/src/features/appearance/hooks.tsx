@@ -1,7 +1,7 @@
-import { useColorScheme } from 'react-native'
-import { useSelector } from 'react-redux'
 import { AppearanceSettingType } from 'peach/src/features/appearance/slice'
 import { AppState } from 'peach/src/state/appReducer'
+import { useColorScheme } from 'react-native'
+import { useSelector } from 'react-redux'
 
 export function useCurrentAppearanceSetting(): AppearanceSettingType {
   const { selectedAppearanceSettings } = useSelector((state: AppState) => state.appearanceSettings)

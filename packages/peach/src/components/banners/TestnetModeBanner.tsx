@@ -1,9 +1,9 @@
+import { useEnabledChain } from 'peach/src/features/chains/utils'
+import { TESTNET_MODE_BANNER_HEIGHT } from 'peach/src/hooks/useAppInsets'
 import { Flex, FlexProps, Text, isWeb } from 'ui/src'
 import { Wrench } from 'ui/src/components/icons/Wrench'
 import { useDeviceInsets } from 'ui/src/hooks/useDeviceInsets'
-import { TESTNET_MODE_BANNER_HEIGHT } from 'peach/src/hooks/useAppInsets'
 import { isInterface, isMobileApp } from 'utilities/src/platform'
-import { useEnabledChain } from 'peach/src/features/chains/utils'
 
 export function TestnetModeBanner(props: FlexProps): JSX.Element | null {
   const { isTestnet } = useEnabledChain()

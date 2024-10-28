@@ -1,5 +1,5 @@
-import { useDeviceInsets } from 'ui/src/hooks/useDeviceInsets'
 import { useEnabledChain } from 'peach/src/features/chains/utils'
+import { useDeviceInsets } from 'ui/src/hooks/useDeviceInsets'
 import { isMobileApp } from 'utilities/src/platform'
 
 export const TESTNET_MODE_BANNER_HEIGHT = 44
