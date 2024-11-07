@@ -1,0 +1,9 @@
+{
+  "name": "@peach/eslint-plugin-eslint-rules",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "eslint-plugin-react-native": "4.1.0"
+  }
+}

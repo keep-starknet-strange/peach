@@ -1,0 +1,47 @@
+buildscript {
+    ext {
+        buildToolsVersion = "34.0.0"
+        minSdkVersion = 28
+        compileSdkVersion = 34
+        targetSdkVersion = 34
+        ndkVersion = "25.2.9519653"
+        kotlinVersion = "1.8.20"
+
+        compose = "1.4.3"
+        corePerf = "1.0.0-beta01"
+        flowlayout = "0.23.1"
+        kotlinSerialization = "1.5.1"
+        lifecycle = "2.5.1"
+        multidexVersion = "2.0.1"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    }
+}
+
+plugins {
+  id 'org.jetbrains.kotlin.plugin.serialization' version "$kotlinVersion"
+}
+
+allprojects {
+  project.pluginManager.withPlugin("com.facebook.react") {
+    react {
+      reactNativeDir = rootProject.file("../../../node_modules/react-native/")
+    }
+  }
+
+  repositories {
+    maven {
+      // expo-camera bundles a custom com.google.android:cameraview
+      url "$rootDir/../../../node_modules/expo-camera/android/maven"
+    }
+  }
+}
+
+apply plugin: "com.facebook.react.rootproject"
