@@ -14,7 +14,6 @@ defmodule Peach.Event do
     field :description, :string
     field :location, :string
     field :cover, :string
-    field :onchain, :boolean, default: false
     field :treasury, :string
 
     has_many :ticket_tiers, Peach.TicketTier

@@ -5,6 +5,7 @@ defmodule Peach.Events do
   alias Peach.CalldataBuilder
   alias Peach.Config
   alias Peach.Event
+  alias Peach.OnchainEvent
   alias Peach.Repo
   alias Peach.TicketTiers
   import Ecto.Query
@@ -67,7 +68,9 @@ defmodule Peach.Events do
         {:ok,
          Repo.all(
            from e in Event,
-             where: e.end >= ^datetime and e.id > ^event_id,
+             join: oe in OnchainEvent,
+             on: oe.event_id == e.id,
+             where: e.end >= ^datetime and e.id > ^event_id and oe.onchain,
              order_by: [asc: e.start, asc: e.id],
              limit: ^first
          )}
@@ -89,7 +92,9 @@ defmodule Peach.Events do
         {:ok,
          Repo.all(
            from e in Event,
-             where: e.end >= ^datetime and e.id > ^event_id,
+             join: oe in OnchainEvent,
+             on: oe.event_id == e.id,
+             where: e.end >= ^datetime and e.id > ^event_id and oe.onchain,
              order_by: [asc: e.start, asc: e.id],
              limit: ^@default_limit
          )}
@@ -108,7 +113,9 @@ defmodule Peach.Events do
         {:ok,
          Repo.all(
            from e in Event,
-             where: e.end >= ^datetime and e.id > ^@default_event_id,
+             join: oe in OnchainEvent,
+             on: oe.event_id == e.id,
+             where: e.end >= ^datetime and e.id > @default_event_id and oe.onchain,
              order_by: [asc: e.start, asc: e.id],
              limit: ^first
          )}
@@ -127,7 +134,9 @@ defmodule Peach.Events do
         {:ok,
          Repo.all(
            from e in Event,
-             where: e.end >= ^datetime and e.id > @default_event_id,
+             join: oe in OnchainEvent,
+             on: oe.event_id == e.id,
+             where: e.end >= ^datetime and e.id > @default_event_id and oe.onchain,
              order_by: [asc: e.start, asc: e.id],
              limit: @default_limit
          )}

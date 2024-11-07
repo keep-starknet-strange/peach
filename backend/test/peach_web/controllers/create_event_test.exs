@@ -44,7 +44,6 @@ defmodule PeachWeb.EventCreateControllerTest do
     assert event.description == "A conference about blockchain technology."
     assert event.location == "San Francisco, CA"
     assert event.cover == "https://example.com/cover.jpg"
-    assert not event.onchain
 
     # Check that the ticket tiers were created
     ticket_tiers = Repo.all(from tt in TicketTier, where: tt.event_id == ^event.id)

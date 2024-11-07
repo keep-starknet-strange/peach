@@ -1,12 +1,31 @@
 defmodule PeachWeb.GetEventControllerTest do
   use PeachWeb.ConnCase, async: true
   alias Peach.Event
+  alias Peach.OnchainEvent
   alias Peach.Repo
+  alias Peach.TicketTier
 
   setup do
     # Insert sample events
     event1 =
       Repo.insert!(%Event{
+        description: "A conference about blockchain technology.",
+        location: "San Francisco, CA",
+        cover: "https://example.com/cover.jpg",
+        ticket_tiers: [
+          %TicketTier{
+            name: "General Admission",
+            description: "Access to all sessions",
+            price: 5,
+            max_supply: 100
+          },
+          %TicketTier{
+            name: "VIP",
+            description: "Access to VIP sessions and perks",
+            price: 10,
+            max_supply: 20
+          }
+        ],
         name: "Past Event",
         start: ~N[2024-11-05 09:00:00],
         end: ~N[2024-11-06 17:00:00],
@@ -15,19 +34,81 @@ defmodule PeachWeb.GetEventControllerTest do
 
     event2 =
       Repo.insert!(%Event{
+        description: "A conference about blockchain technology.",
+        location: "San Francisco, CA",
+        cover: "https://example.com/cover.jpg",
+        ticket_tiers: [
+          %TicketTier{
+            name: "General Admission",
+            description: "Access to all sessions",
+            price: 5,
+            max_supply: 100
+          },
+          %TicketTier{
+            name: "VIP",
+            description: "Access to VIP sessions and perks",
+            price: 10,
+            max_supply: 20
+          }
+        ],
         name: "Current Event",
         start: ~N[2024-11-10 09:00:00],
-        end: ~N[2024-11-12 17:00:00]
+        end: ~N[2024-11-12 17:00:00],
+        treasury: "0xbeef"
       })
 
     event3 =
       Repo.insert!(%Event{
+        description: "A conference about blockchain technology.",
+        location: "San Francisco, CA",
+        cover: "https://example.com/cover.jpg",
+        ticket_tiers: [
+          %TicketTier{
+            name: "General Admission",
+            description: "Access to all sessions",
+            price: 5,
+            max_supply: 100
+          },
+          %TicketTier{
+            name: "VIP",
+            description: "Access to VIP sessions and perks",
+            price: 10,
+            max_supply: 20
+          }
+        ],
         name: "Future Event",
         start: ~N[2024-11-15 09:00:00],
         end: ~N[2024-11-17 17:00:00],
         treasury: "0xbeef"
       })
 
+    Repo.insert!(%Event{
+      description: "A conference about blockchain technology.",
+      location: "San Francisco, CA",
+      cover: "https://example.com/cover.jpg",
+      ticket_tiers: [
+        %TicketTier{
+          name: "General Admission",
+          description: "Access to all sessions",
+          price: 5,
+          max_supply: 100
+        },
+        %TicketTier{
+          name: "VIP",
+          description: "Access to VIP sessions and perks",
+          price: 10,
+          max_supply: 20
+        }
+      ],
+      name: "Not onchain Event",
+      start: ~N[2024-11-15 09:00:00],
+      end: ~N[2024-11-17 17:00:00],
+      treasury: "0xbeef"
+    })
+
+    Repo.insert(%OnchainEvent{id: "0x01_0x02", event_id: event1.id, onchain: true})
+    Repo.insert(%OnchainEvent{id: "0x02_0x03", event_id: event2.id, onchain: true})
+    Repo.insert(%OnchainEvent{id: "0x03_0x04", event_id: event3.id, onchain: true})
     {:ok, event1: event1, event2: event2, event3: event3}
   end
 
