@@ -44,6 +44,7 @@ module.exports = {
     '@typescript-eslint',
     '@jambit/typed-redux-saga',
     'check-file',
+    '@peach/eslint-rules',
   ],
   rules: {
     ...complexityRules,
@@ -116,7 +117,48 @@ module.exports = {
         additionalHooks: '(useAnimatedStyle|useDerivedValue|useAnimatedProps)',
       },
     ],
-    'no-restricted-imports': 'error',
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'react',
+            importNames: ['Suspense'],
+            message: 'Please use Suspense from src/components/data instead.',
+          },
+          {
+            name: '@tamagui/core',
+            message: "Please import from 'tamagui' directly to prevent mismatches.",
+          },
+          {
+            name: 'react-native-safe-area-context',
+            importNames: ['useSafeAreaInsets'],
+            message: 'Use our internal `useAppInsets` hook instead.',
+          },
+          {
+            name: 'react-native',
+            importNames: ['Switch'],
+            message: 'Use our custom Switch component instead.',
+          },
+          {
+            name: 'react-native',
+            importNames: ['Keyboard'],
+            message:
+              'Please use dismissNativeKeyboard() instead for dismissals. addListener is okay to ignore this import for!',
+          },
+          {
+            name: '@gorhom/bottom-sheet',
+            importNames: ['BottomSheetTextInput'],
+            message: 'Use our internal `BottomSheetTextInput` wrapper from `/uniswap/src/components/modals/Modal`.',
+          },
+          {
+            name: 'expo-haptics',
+            message: "Use our internal `HapticFeedback` wrapper instead: `import { HapticFeedback } from 'ui/src'`",
+          },
+        ],
+      },
+    ],
+
     'no-restricted-syntax': [
       'error',
       {
@@ -168,7 +210,8 @@ module.exports = {
     // Overrides rules from @react-native-community:
     // https://github.com/facebook/react-native/blob/3cf0291008dfeed4d967ebb95bdccbe2d52c5b81/packages/eslint-config-react-native-community/index.js#L313
     'react-native/no-unused-styles': 'error',
-    'react-native/sort-styles': 'error',
+    'react-native/sort-styles': 'off', // disable the original rule
+    '@peach/eslint-rules/sort-styles': 'error', // enable our custom rule
     // Security Linting
     // Mozilla's No Unsanitized - https://github.com/mozilla/eslint-plugin-no-unsanitized
     'no-unsanitized/method': 'error',

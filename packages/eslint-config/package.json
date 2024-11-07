@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "@jambit/eslint-plugin-typed-redux-saga": "0.4.0",
+    "@peach/eslint-plugin-eslint-rules": "workspace:^",
     "@react-native-community/eslint-config": "3.2.0",
     "@rushstack/eslint-patch": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "6.20.0",

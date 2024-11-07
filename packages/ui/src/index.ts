@@ -1,4 +1,5 @@
 export { RemoveScroll } from '@tamagui/remove-scroll'
+// eslint-disable-next-line no-restricted-imports
 export { ImpactFeedbackStyle } from 'expo-haptics'
 export {
   Accordion,

@@ -27,7 +27,7 @@
       "INTERNAL_MISMATCH"
     ]
   },
-  "packageManager": "yarn@3.6.4",
+  "packageManager": "yarn@3.2.3",
   "private": true,
   "scripts": {
     "g:build": "turbo run build --concurrency=100%",
@@ -52,13 +52,16 @@
     "peach": "yarn workspace peach",
     "utilities": "yarn workspace utilities"
   },
-  "workspaces": [
-    "apps/*",
-    "config/*",
-    "packages/*"
-  ],
   "devDependencies": {
     "react-native-monorepo-tools": "1.2.1",
     "react-native-svg-transformer": "1.5.0"
-  }
+  },
+  "resolutions": {
+    "expo-haptics": "12.8.1"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "config/*"
+  ]
 }

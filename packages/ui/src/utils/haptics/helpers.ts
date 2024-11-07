@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-imports
 import { ImpactFeedbackStyle, NotificationFeedbackType } from 'expo-haptics'
 
 export const NO_HAPTIC_FEEDBACK: HapticFeedback = {

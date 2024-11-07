@@ -25,12 +25,8 @@ const config = {
   resolver: {
     nodeModulesPaths: [`${workspaceRoot}/node_modules`],
     assetExts: assetExts.filter((ext) => ext !== 'svg'),
-    sourceExts: [...sourceExts, 'svg', 'cjs'],
-    extraNodeModules: {
-      // Add polyfills for Node.js core modules
-      'path': require.resolve('path-browserify'),
-      'os': require.resolve('os-browserify/browser'),
-    },
+    // detox mocking works properly only being spreaded at the beginning of sourceExts array
+    sourceExts: [...sourceExts, 'svg', 'cjs']
   },
   transformer: {
     getTransformOptions: async () => ({
