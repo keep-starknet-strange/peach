@@ -11,7 +11,6 @@ defmodule PeachWeb.EventUpdateControllertest do
     description: "Original description",
     location: "Original location",
     cover: "https://example.com/original_cover.jpg",
-    onchain: false,
     treasury: "0xdead"
   }
 
@@ -48,7 +47,6 @@ defmodule PeachWeb.EventUpdateControllertest do
       assert event.description == acc.description
       assert event.location == acc.location
       assert event.cover == acc.cover
-      assert not event.onchain
       acc
     end)
   end
@@ -79,7 +77,6 @@ defmodule PeachWeb.EventUpdateControllertest do
       assert event.description == expected_event.description
       assert event.location == expected_event.location
       assert event.cover == expected_event.cover
-      assert not event.onchain
     end)
   end
 end

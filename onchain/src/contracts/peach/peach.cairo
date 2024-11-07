@@ -91,7 +91,6 @@ pub mod Peach {
     // Emitted on event creation
     #[derive(Drop, starknet::Event)]
     pub struct EventCreated {
-        #[key]
         pub id: u64,
     }
 
